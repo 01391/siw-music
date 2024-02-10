@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Genere</title>
+	
+</head>
+
+<body>
+	
+    <h1>Dettagli Genere</h1>
+    
+    <div th:if="${genre}">
+		<div>
+        	<span th:text="${genre.name}"></span>
+        </div>
+        <div th:each="image : ${genre.photo}">
+					<img th:src=${image.link}> 	
+		</div>  
+    </div>
+    
+    
+    <div th:unless="${genre}">Non esiste</div>
+    
+  
+  </body>
+</html>

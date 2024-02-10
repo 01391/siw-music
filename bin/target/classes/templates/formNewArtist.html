@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>SIW Music By Oleg</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-snapx-photography.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+    <!-- CSS per Datatable -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+<!--
+TemplateMo 576 SnapX Photography
+https://templatemo.com/tm-576-snapx-photography
+-->
+
+</head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/assets/images/logo.png" alt="SnapX Photography Template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="/artist" class="active">Artisti</a></li>
+                        <li><a href="#" class="active">Album</a></li>
+                        <li><a href="#" class="active">Generi</a></li>                                                                                                              
+                    </ul>   
+                  
+                    	
+							<div th:if="${userDetails}" class="border-button">
+                      			<a href="#" th:text="${userDetails.username}"></a>
+                    		</div>
+					
+							<div th:if="${userDetails}" class="border-button">
+                     			 <a href="/logout"><i class="fa fa-user"></i> Logout</a>
+                    		</div>       
+                    
+                     		<div th:unless="${userDetails}" class="border-button">
+                      			<a href="/login"><i class="fa fa-user"></i> Login</a>
+                    		</div>
+                   
+                  		    <div th:unless="${userDetails}" class="border-button">
+                      			<a href="/register"><i class="fa fa-user"></i> Registrati </a>
+                    		</div>
+
+                    
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+<!-- ***** SEZIONE PER INSERIMENTO RECENSIONE ***** -->
+
+<section class="inserimento artista">
+    <div class="container">
+      <div class="row">
+		  <div class="col-sm-12 text-black">		
+			
+			<form th:action="@{/insert_artist}" method="POST" th:object="${artist}">
+				<div class="mb-3">
+ 					 <label for="exampleFormControlInput1" class="form-label">Nome Artista</label>
+  					  <input type="text" th:field="${artist.name}" class="form-control" required>
+				</div>
+				
+				<div class="mb-3">
+ 					 <label for="exampleFormControlInput1" class="form-label">Data Inizio</label>
+  					  <input type="date" th:field="${artist.dateOfBirth}" class="form-control" >
+				</div>
+				
+				<div class="mb-3">
+ 					 <label for="exampleFormControlInput1" class="form-label">Data Fine</label>
+  					  <input type="date" th:field="${artist.dateOfDeath}" class="form-control" >
+				</div>
+				
+				<div class="col-sm-6 text-black">	
+					<button type="submit" class="btn btn-outline-primary"><i class="fa fa-plus-square"></i>   Inserisci Artista</button>
+    			</div>		
+    			
+			</form>				
+    	</div>		
+      </div>
+   </div>
+</section>
+
+<!-- ***** FOOTER ***** -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="#">SIW Music</a> Un mondo di Musica. </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- ***** FINE FOOTER ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+
+  <script src="/assets/js/tabs.js"></script>
+  <script src="/assets/js/popup.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+  <!-- SCRIPT PER DATATABLES -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="/assets/js/table.js"></script>
+ 
+ 
+
+  </body>
+</html>

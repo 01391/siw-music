@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>SIW Music By Oleg</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-snapx-photography.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+    <!-- CSS per Datatable -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+<!--
+TemplateMo 576 SnapX Photography
+https://templatemo.com/tm-576-snapx-photography
+-->
+
+</head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/assets/images/logo.png" alt="SnapX Photography Template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="#" class="active">Artisti</a></li>
+                        <li><a href="#" class="active">Album</a></li>
+                        <li><a href="#" class="active">Generi</a></li>                                                                                                              
+                    </ul>   
+                 
+							<div th:if="${userDetails}" class="border-button">
+                      			<a href="#" th:text="${userDetails.username}"></a>
+                    		</div>
+					
+							<div th:if="${userDetails}" class="border-button">
+                     			 <a href="/logout"><i class="fa fa-user"></i> Logout</a>
+                    		</div>       
+                    
+                     		<div th:unless="${userDetails}" class="border-button">
+                      			<a href="/login"><i class="fa fa-user"></i> Login</a>
+                    		</div>
+                   
+                  		    <div th:unless="${userDetails}" class="border-button">
+                      			<a href="/register"><i class="fa fa-user"></i> Registrati </a>
+                    		</div>
+
+                    
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+  
+	
+ 
+ <section class="pricing-plans">
+ <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading text-center">
+            <h6>SIW MUSIC</h6>
+            <h4>Elenco <em>Recensioni</em></h4>
+          </div>
+        </div>
+      </div>
+      
+	<!-- RIGA PER TABELLA ALBUM -->
+	<div th:if="${reviews==null || reviews.isEmpty()}">Non ci sono recensioni nel sistema</div>
+	
+		<div class="row">
+			<div class="col-sm-12">			
+      			<table id="example" class="table table-striped" style="width:100%">
+        		<thead>
+            		<tr>
+                		<th></th>
+                		<th>Album</th>
+                		<th>Artista</th>
+                		<th>Utente</th>
+                		<th>Titolo</th>
+                		<th>Testo</th>
+                		<th>Valutazione</th>
+                		<th>Data</th>
+            		</tr>
+        		</thead>
+        		<tbody>	
+					<tr th:each="review : ${reviews}">					
+						<td valign="middle">
+								<img th:src=${review.album.getPhoto().link} align="left" style="width:50px;height:50px;" class="img-thumbnail"> 	
+						</td>
+						<td th:text="${review.album.getName()}" valign="middle"</td>
+						<td th:text="${review.album.getArtist().getName()}" valign="middle"</td>	
+						<td th:text="${review.getUser().getSurname()+' '+review.getUser().getName()}" valign="middle"</td>
+						<td th:text="${review.getTitle()}" valign="middle"</td>
+						<td th:text="${review.getText()}" valign="middle"</td>
+						<td th:if="${review.getRating() == 5}" valign="middle"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+						<td th:if="${review.getRating() == 4}" valign="middle"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+						<td th:if="${review.getRating() == 3}" valign="middle"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+						<td th:if="${review.getRating() == 2}" valign="middle"><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+						<td th:if="${review.getRating() == 1}" valign="middle"><i class="fa fa-star"></i></td>  
+						<td th:text="${review.getDateInsert()}" valign="middle"</td>
+					</tr>	
+        	</tbody>
+        	<tfoot>
+            	<tr>
+                		<th></th>
+                		<th>Album</th>
+                		<th>Artista</th>
+                		<th>Utente</th>
+                		<th>Titolo</th>
+                		<th>Testo</th>
+                		<th>Valutazione</th>
+                		<th>Data</th>
+            	</tr>
+        	</tfoot>
+    		</table>	
+		</div>
+	</div>
+</div>
+</section>
+
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="#">SIW Music</a> Un mondo di Musica. </p>
+          
+    
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+
+  <script src="/assets/js/tabs.js"></script>
+  <script src="/assets/js/popup.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+  <!-- SCRIPT PER DATATABLES -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  		<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  		<script src="/assets/js/table.js"></script>
+  
+
+  </body>
+</html>

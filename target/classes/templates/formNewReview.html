@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>SIW Music By Oleg</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-snapx-photography.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+    <!-- CSS per Datatable -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+<!--
+TemplateMo 576 SnapX Photography
+https://templatemo.com/tm-576-snapx-photography
+-->
+
+</head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/assets/images/logo.png" alt="SnapX Photography Template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="/artist" class="active">Artisti</a></li>
+                        <li><a href="#" class="active">Album</a></li>
+                        <li><a href="#" class="active">Generi</a></li>                                                                                                              
+                    </ul>   
+                  
+                    	
+							<div th:if="${userDetails}" class="border-button">
+                      			<a href="#" th:text="${userDetails.username}"></a>
+                    		</div>
+					
+							<div th:if="${userDetails}" class="border-button">
+                     			 <a href="/logout"><i class="fa fa-user"></i> Logout</a>
+                    		</div>       
+                    
+                     		<div th:unless="${userDetails}" class="border-button">
+                      			<a href="/login"><i class="fa fa-user"></i> Login</a>
+                    		</div>
+                   
+                  		    <div th:unless="${userDetails}" class="border-button">
+                      			<a href="/register"><i class="fa fa-user"></i> Registrati </a>
+                    		</div>
+
+                    
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+<!-- ***** SEZIONE PER INSERIMENTO RECENSIONE ***** -->
+
+<section class="inserimento recensione">
+    <div class="container">
+     <div th:if="${review.album}">	
+      <div class="row">
+		  <div class="col-sm-3 text-black">	
+			  	<div>
+        			<h4>Album:<span th:text="${review.album.getName()}"></span></h4>
+        		</div>
+        		<div>
+        			<h6>Artista:<span th:text="${review.album.getArtist().getName()}"></span></h6>
+        		</div>		
+				<span><img th:src=${review.album.getPhoto().link} style="width:320px;height:320px;" class="img-thumbnail"></span>
+    		</div>	
+    		<div class="col-sm-9 text-black">	
+
+			<div th:if="${credentials == 'DEFAULT'}">
+			<form th:action="@{/insert_review}" method="POST" th:object="${review}">
+				<div>
+					<span th:text="${messaggioErrore}">Errore</span>
+				</div>	
+				<div class="mb-3">
+ 					 <label for="exampleFormControlInput1" class="form-label">Titolo</label>
+  					  <input type="text" th:field="${review.title}" class="form-control" required>
+				</div>
+				<div class="mb-3">
+ 					 <label for="exampleFormControlTextarea1" class="form-label">Testo</label>
+					  <textarea class="form-control" th:field="${review.text}" rows="2" required></textarea>
+				</div>
+				<div class="form-check">
+  					<input th:field="${review.rating}" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="5" checked>
+  						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+  						<label class="form-check-label" for="exampleRadios1">
+    					   Eccellente
+  						</label>
+				</div>
+				<div class="form-check">
+  					<input th:field="${review.rating}" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="4">
+  						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+  						<label class="form-check-label" for="exampleRadios1">
+    					   Buono
+  						</label>
+				</div>
+				<div class="form-check">
+  					<input th:field="${review.rating}" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="3">
+  						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+  						<label class="form-check-label" for="exampleRadios1">
+    					   Medio
+  						</label>
+				</div>
+				<div class="form-check">
+  					<input th:field="${review.rating}" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="2">
+  						<i class="fa fa-star"></i><i class="fa fa-star"></i>
+  						<label class="form-check-label" for="exampleRadios1">
+    					   Mediocre
+  						</label>
+				</div>		
+				<div class="form-check">
+  					<input th:field="${review.rating}" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
+  						<i class="fa fa-star"></i>
+  						<label class="form-check-label" for="exampleRadios1">
+    					   Pessimo
+  						</label>
+				</div>
+				<div>
+					<input type="hidden" th:field="${review.dateInsert}" id="currentDateInput" name="currentDate"/>
+				</div>	
+				<div>	
+					<input type="hidden" th:field="${review.album}" />
+				</div>
+				<div>
+					<input type="hidden" th:field="${review.user}" />
+				</div>
+				<div>
+					<label for="exampleFormControlTextarea1" class="form-label">  </label>
+				</div>
+				<div class="col-sm-6 text-black">	
+					<button type="submit" class="btn btn-outline-primary"><i class="fa fa-plus-square"></i>   Inserisci Recensione</button>
+    			</div>		
+			</form>		
+    		</div>				
+    	</div>		
+      </div>
+     </div>	
+   </div>
+</section>
+
+<!-- ***** FOOTER ***** -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="#">SIW Music</a> Un mondo di Musica. </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- ***** FINE FOOTER ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+
+  <script src="/assets/js/tabs.js"></script>
+  <script src="/assets/js/popup.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+  <!-- SCRIPT PER DATATABLES -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="/assets/js/table.js"></script>
+ 
+  <!-- SCRIPT PER IL CALCOLO DELLA DATA CORRENTE DA MEMORIZZARE PER IL POST -->
+  		<script>
+        // Get the current date and format it as yyyy-mm-dd
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Set the current date as the value of the hidden input field
+        const currentDateInput = document.getElementById('currentDateInput');
+        currentDateInput.value = getCurrentDate();
+    	</script>
+
+  </body>
+</html>

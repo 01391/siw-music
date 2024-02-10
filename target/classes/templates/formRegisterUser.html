@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>SIW Music By Oleg</title>
+    
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-snapx-photography.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+
+<!--
+TemplateMo 576 SnapX Photography
+
+https://templatemo.com/tm-576-snapx-photography
+
+-->
+  </head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="SnapX Photography Template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html" class="active">Home</a></li>
+                 		<li><a href="index.html" class="active">Artisti</a></li>
+                        <li><a href="categories.html">Album</a></li>
+                        <li><a href="users.html">Generi</a></li>                         
+                    </ul>   
+                                        
+                    <div class="border-button">
+                      <a href="/login"><i class="fa fa-user"></i> Login</a>
+                    </div>
+                   
+                    <div class="border-button">
+                      <a href="/register"><i class="fa fa-user"></i> Registrati </a>
+                    </div>
+                    
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+<!-- ***** SEZIONE PER REGISTRAZIONE UTENTE ***** -->
+
+<section class="vh-100">
+	<div class="container-fluid">
+    	<div class="row"> 
+      		<div class="col-sm-6 text-black">
+        		<div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+	 				<form th:action="@{/register}" method="POST">
+					<div class="form-outline mb-4">
+						<input class="form-control form-control-lg" type="text" placeholder="nome" required th:field="${user.name}" />
+						<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" th:style="'color:red'">
+						</span>
+						<label class="form-label" for="form2Example18">Nome</label>
+					</div>
+					<div class="form-outline mb-4">
+						<input class="form-control form-control-lg" type="text" placeholder="cognome" required th:field="${user.surname}" />
+						<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" th:style="'color:red'">
+						</span>
+						<label class="form-label" for="form2Example18">Cognome</label>
+					</div>		
+					<div class="form-outline mb-4">
+						<input class="form-control form-control-lg" type="email" placeholder="email" required th:field="${user.email}" />
+						<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">
+						</span>
+						<label class="form-label" for="form2Example18">Email</label>
+					</div>
+					<div class="form-outline mb-4">
+						<input class="form-control form-control-lg" type="text" placeholder="username" required th:field="${credentials.username}" />
+						<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}" th:style="'color:red'">
+						</span>
+						<label class="form-label" for="form2Example18">Username</label>
+					</div>
+					<div class="form-outline mb-4">
+						<input class="form-control form-control-lg" type="password" placeholder="password" required th:field="${credentials.password}" />
+						<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}" th:style="'color:red'">
+						</span>
+						<label class="form-label" for="form2Example18">Password</label>
+					</div>
+					<div class="pt-1 mb-4">
+             			<button class="btn btn-info btn-lg btn-block" type="submit">Registra</button>
+        			</div>
+           			</form>
+        		</div>
+      		</div>
+      		<div class="col-sm-6 px-0 d-none d-sm-block">
+		   		<img src="assets/images/concert.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+      		</div>
+    	</div>
+  	</div>
+</section>
+
+<!-- ***** FINE SEZIONE PER REGISTRAZIONE UTENTE ***** -->
+
+<!-- ***** FOOTER ***** -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="#">SIW Music</a> Un mondo di Musica. </p> 
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+<!-- ***** FINE FOOTER ***** -->
+  
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+ 
+  </body>
+</html>

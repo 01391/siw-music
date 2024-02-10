@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="templatemo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <title>SIW Music By Oleg</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-snapx-photography.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    
+    <!-- CSS per Datatable -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+<!--
+TemplateMo 576 SnapX Photography
+https://templatemo.com/tm-576-snapx-photography
+-->
+
+</head>
+
+<body>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="/assets/images/logo.png" alt="SnapX Photography Template">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="/artist" class="active">Artisti</a></li>
+                        <li><a href="#" class="active">Album</a></li>
+                        <li><a href="#" class="active">Generi</a></li>                                                                                                              
+                    </ul>   
+                  
+                    	
+							<div th:if="${userDetails}" class="border-button">
+                      			<a href="#" th:text="${userDetails.username}"></a>
+                    		</div>
+					
+							<div th:if="${userDetails}" class="border-button">
+                     			 <a href="/logout"><i class="fa fa-user"></i> Logout</a>
+                    		</div>       
+                    
+                     		<div th:unless="${userDetails}" class="border-button">
+                      			<a href="/login"><i class="fa fa-user"></i> Login</a>
+                    		</div>
+                   
+                  		    <div th:unless="${userDetails}" class="border-button">
+                      			<a href="/register"><i class="fa fa-user"></i> Registrati </a>
+                    		</div>
+
+                    
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+
+ <!-- ***** SEZIONE PER PULSANTI ATTIVITA ADMIN ***** -->
+ 
+ <section class="sezione admin">
+ <div class="container">
+	<!-- RIGA PER INSERIMENTO NUOVO ALBUM PER PROFILO ADMIN -->
+	 <div th:if="${credentials == 'ADMIN'}">
+	      <div class="row">
+    			<div class="col-sm-4 text-black">	
+						<div class="border-button">
+                     			 <a href="/logout"><i class="fa fa-trash"></i> Elimina Artista</a>
+                    	</div>       
+    			</div>
+    			<div class="col-sm-4 text-black">
+                    	<div class="border-button">
+                     			 <a href="/logout"><i class="fa fa-pencil-square"></i> Modifica Dati Artista</a>
+                    	</div>   
+                </div>
+      		</div>
+     	  </div>
+    </div> 	  
+ </div>
+ </section>	
+ 
+ <!-- ***** SEZIONE DATI ARTISTA ***** -->
+
+<section class="dati artista">
+    <div class="container">
+     <div th:if="${artist}">	
+      <div class="row">
+		  <div class="col-sm-3 text-black">			
+			   <span><img th:src=${artist.getPhoto().link} style="width:100%;height:100%;" class="img-thumbnail"></span>
+    	  </div>	
+    		<div class="col-sm-3 text-black">	
+				<div>
+        			<h2><span th:text="${artist.name}"></span></h2>
+        		</div>
+    		</div>		
+      	</div>
+     </div>	
+    </div>
+</section>
+
+ <!-- ***** FINE SEZIONE DATI ARTISTA ***** -->
+
+ <!-- ***** SEZIONE DATATABLE PER ALBUM ARTISTA ***** -->
+
+<section class="sezione datatable album artista">
+   <div class="container-fluid">	
+      	<table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Img</th>
+                <th>Album</th>
+                <th>Data Pubblicazione</th>
+                <th></th>
+                <th th:if="${credentials == 'ADMIN'}"></th>
+                <th th:if="${credentials == 'ADMIN'}"></th>
+                <th></th>
+                <th th:if="${credentials == 'DEFAULT'}"></th>
+            </tr>
+        </thead>
+        <tbody>
+				<div th:if="${albums==null || albums.isEmpty()}">Non ci sono album nel sistema</div>
+				<tr th:each="album : ${albums}">
+					<td valign="middle">
+						<img th:src=${album.getPhoto().link} align="left" style="width:50px;height:50px;" class="img-thumbnail"> 	
+					</td>							
+					<td th:text="${album.name}" valign="middle"</td>
+					<td th:text="${album.getDateOfPublication()}" valign="middle"</td>
+					<td valign="middle">
+						<a href="#"><img class="rounded float-start" alt="VISUALIZZA TRACKLIST" title="VISUALIZZA TRACKLIST" src="/assets/images/icons/caret-right-square.svg" width="20" height="20"></a>
+					</td>
+					<td th:if="${credentials == 'ADMIN'}" valign="middle">
+						<a href="#"><img class="rounded float-start" alt="MODIFICA DATI ALBUM" title="MODIFICA DATI ALBUM" src="/assets/images/icons/pencil-square.svg"   width="20" height="20"></a>
+					</td>
+					<td th:if="${credentials == 'ADMIN'}" valign="middle">
+						<a href="#"><img alt="ELIMINA ALBUM" title="ELIMINA ALBUM" src="/assets/images/icons/trash.svg"  width="20" height="20"></a>
+					</td>
+					<td valign="middle">
+						<a th:href="@{'/review_album' + '/' + ${album.id}}"><img alt="VISUALIZZA RECENSIONI" title="VISUALIZZA RECENSIONI" src="/assets/images/icons/eye.svg" width="20" height="20"></a>
+					</td>
+					<td th:if="${credentials == 'DEFAULT'}" valign="middle">
+						<a th:href="@{'/formNewReview' + '/' + ${album.id}}"><img alt="INSERISCI RECENSIONE" title="INSERISCI RECENSIONE" src="/assets/images/icons/card-text.svg" width="20" height="20"></a>
+					</td>
+				</tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Img</th>
+                <th>Album</th>
+                <th>Data Pubblicazione</th>
+                <th></th>
+                <th th:if="${credentials == 'ADMIN'}"></th>
+                <th th:if="${credentials == 'ADMIN'}"></th>
+                <th></th>
+                <th th:if="${credentials == 'DEFAULT'}"></th>
+            </tr>
+        </tfoot>
+    </table>	
+    		<div th:unless="${artist}">Non esiste</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- *****  FINE SEZIONE DATATABLE PER ALBUM ARTISTA ***** -->
+
+<!-- *****  FOOTER ***** -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p><a href="#">SIW Music</a> Un mondo di Musica. </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+<!-- *****  FINE FOOTER ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="/assets/js/isotope.min.js"></script>
+  <script src="/assets/js/owl-carousel.js"></script>
+
+  <script src="/assets/js/tabs.js"></script>
+  <script src="/assets/js/popup.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+  <!-- SCRIPT PER DATATABLES -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  		<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  		<script src="/assets/js/table.js"></script>
+  </body>
+</html>
